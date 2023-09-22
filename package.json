@@ -1,0 +1,19 @@
+{
+  "name": "biblioteca",
+  "version": "1.0.0",
+  "description": "SOA C1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/211102-Miller/C1-211102-hexagonal.git"
+  },
+  "author": "Miller Vidal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/211102-Miller/C1-211102-hexagonal/issues"
+  },
+  "homepage": "https://github.com/211102-Miller/C1-211102-hexagonal#readme"
+}
