@@ -1,12 +1,13 @@
 import { User } from "./user";
 
-export interface BookRepository{
-    postUser(
+export interface UserRepository{
+    createUser(
         name:string,
-        last_name: string,
         email: string,
         password: string,
         phone: string,
         status: boolean
-        ):Promise<User| null>;
+        ):Promise<User | null>;
+   
+    
 }
