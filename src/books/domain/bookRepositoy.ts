@@ -6,7 +6,7 @@ export interface BookRepository{
         title:string,
         author: string,
         img_url:string,
-        status:string,
+        status:boolean,
         is_loaded: boolean
     ):Promise<Book | null>;
     
@@ -14,11 +14,13 @@ export interface BookRepository{
 
     getBook(id:number):Promise<Book|null>;
 
-    updataStatus(id:number, newStatus: string):Promise<Book | null>;
+    updataStatus(id:number):Promise<Book | null>;
 
-    getBookInactive(status:string):Promise<Book[]|null>;
+    getBookInactive(status:boolean):Promise<Book[]|null>;
 
-    updateBookLead(id:number,is_loaded:boolean ):Promise<Book | null>;
+    updateBookLead(id:number):Promise<Book | null>;
+
+    updateBookStore(id:number):Promise<Book | null>;
 
     deleteBook(id:number):Promise<Book | null>;
     
@@ -27,15 +29,15 @@ export interface BookRepository{
         title: string,
         author: string,
         img_url: string,
-        status: string,
+        status: boolean,
         is_loaded: boolean
     ): Promise<Book | null>
 
     getBookFilter(
         filter: string,
         title?: string,
-        authoe?: string,
-    ):Promise<Book| Book[] | null>
+        author?: string,
+    ):Promise<Book[] | null>
     
 
 

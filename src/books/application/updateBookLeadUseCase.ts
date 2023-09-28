@@ -4,32 +4,20 @@ import { BookRepository } from "../domain/bookRepositoy";
 export class UpdateBookLeadUseCase{
     constructor(readonly bookRepository: BookRepository){}
 
-    async upadateLead(id:number, is_loaded: boolean): Promise<Book | null>{
-        try {
-            
-            const bookToUpdate = await this.bookRepository.getBook(id);
-            if(!bookToUpdate){
-                return null;
-            }
-
-            const updateBook = new Book(
-                bookToUpdate.id,
-                bookToUpdate.title,
-                bookToUpdate.author,
-                bookToUpdate.img_url,
-                bookToUpdate.status,
-                is_loaded
-            )
-            
-            await this.bookRepository.updateBookLead(id,is_loaded);
-
-            return updateBook;
-
-            
-        } catch (error) {
-            console.error('Error al actualizar el estado del libro:', error);
-            return null;
-            
+    async updateLoad(id: number): Promise<{ book: Book | null; message?: string }>{
+        const getLoad = await this.bookRepository.getBook(id);
+        if (!getLoad) {
+            return { book: null };
         }
+        if (getLoad.status) {
+            return { book: getLoad, message: 'El campo "Load" ya estaba en true.' };
+        }
+
+        const loadUpdate = await this.bookRepository.updateBookLead(id)
+
+        if (!loadUpdate) {
+            return { book: null }; // Error al actualizar la revisión
+          }
+          return { book: loadUpdate };
     }
 }
