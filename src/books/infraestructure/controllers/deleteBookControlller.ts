@@ -7,7 +7,7 @@ export class DeleteBookController {
   async deleteBook(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
-
+  
       if (!id) {
         return res.status(400).send({
           status: "error",
@@ -16,10 +16,10 @@ export class DeleteBookController {
           message: "El campo 'id' es requerido en la solicitud.",
         });
       }
-
+  
       const deleted = await this.deleteBookUseCase.deleteBook(id);
-
-      if (deleted) {
+  
+      if (deleted !== null) { // Verifica explícitamente si deleted no es null
         return res.status(200).send({
           status: "success",
           data: {},

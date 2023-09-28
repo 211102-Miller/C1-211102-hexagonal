@@ -2,11 +2,11 @@ import { GetBookInactiveUseCase } from "../../application/getBookInactiveUseCase
 import { Response, Request } from "express";
 
 export class GetBookInactiveController {
-  constructor(private readonly getBookInactiveUseCase: GetBookInactiveUseCase) {}
+  constructor(readonly getBookInactiveUseCase: GetBookInactiveUseCase) {}
 
   async getBookInactive(req: Request, res: Response) {
     try {
-      const status = "Inactivo"; 
+      const status = false; 
       const inactiveBooks = await this.getBookInactiveUseCase.getInactive(status);
 
       if (inactiveBooks) {

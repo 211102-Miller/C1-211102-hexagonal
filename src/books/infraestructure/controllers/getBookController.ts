@@ -20,7 +20,7 @@ export class GetBookController{
               return res.status(404).json({
                 status: "error",
                 data: [],
-                message: "No se encontraron libros por usuario",
+                message: "No se encontraron reseñas por usuario",
               });
             }
           } catch (error) {

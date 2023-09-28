@@ -7,6 +7,7 @@ import { UpdateBookLeadUseCase } from "../application/updateBookLeadUseCase";
 import { DeleteBookUseCase } from "../application/deleteBookUseCase";
 import { UpdateBookUseCase } from "../application/updateBookUseCase";
 import { GetBookFilterUseCase } from "../application/getBookFilterUseCase";
+import { UpdateBookStoreUseCase } from "../application/updateBookStoreUseCase";
 
 import { GetBookController } from "./controllers/getBookController";
 import { CreateBookController } from "./controllers/createBookController";
@@ -17,6 +18,7 @@ import { UpdateBookLeadController } from "./controllers/updateBookLeadController
 import { DeleteBookController } from "./controllers/deleteBookControlller";
 import { UpdateBookController } from "./controllers/updateBookController";
 import { GetBookFilterController } from "./controllers/getBookFilterController";
+import { UpdateBookStoreController } from "./controllers/updateBookStoreController";
 
 import { MysqlBookRepository } from "./mysqlBookRepository";
 
@@ -33,6 +35,7 @@ export const updateBookLeadUseCase = new UpdateBookLeadUseCase(mysqlBookReposito
 export const deleteBookUserCase = new DeleteBookUseCase(mysqlBookRepository);
 export const updateBookUseCase = new UpdateBookUseCase(mysqlBookRepository);
 export const getBookFilterUseCase = new GetBookFilterUseCase(mysqlBookRepository);
+export const updateBookStoreUseCase = new UpdateBookStoreUseCase(mysqlBookRepository)
 
 //Controladores
 export const createBookController = new CreateBookController(createBookUserCase);
@@ -44,5 +47,6 @@ export const updateBookLeadController = new UpdateBookLeadController(updateBookL
 export const deleteBookControlller = new DeleteBookController(deleteBookUserCase);
 export const updateBookController = new UpdateBookController(updateBookUseCase);
 export const getBookFilterController = new GetBookFilterController(getBookFilterUseCase);
+export const updateBookStoreController = new UpdateBookStoreController(updateBookStoreUseCase)
 
 

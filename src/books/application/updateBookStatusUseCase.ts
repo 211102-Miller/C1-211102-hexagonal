@@ -1,33 +1,28 @@
-import { Book} from "../domain/book";
+import { Book } from "../domain/book";
 import { BookRepository } from "../domain/bookRepositoy";
 
-export class UpdateStatusUseCase{
-    constructor(readonly bookRepository: BookRepository){}
+export class UpdateStatusUseCase {
+  constructor(readonly bookRepository: BookRepository) { }
 
-    async updateStatus(id: number, newStatus: string): Promise<Book | null> {
-        try {
-          // Obtén el libro que deseas actualizar
-          const bookToUpdate = await this.bookRepository.getBook(id);
+  async updateStatus(id: number): Promise<{ book: Book | null; message?: string }> {
+
+    // Obtén el libro que deseas actualizar
+    const updateStatus = await this.bookRepository.getBook(id);
+
+    if (!updateStatus) {
+      return { book: null };
+    }
     
-          if (!bookToUpdate) {
-            return null; 
-          }
-          
-          const updatedBook = new Book(
-            bookToUpdate.id,
-            bookToUpdate.title,
-            bookToUpdate.author,
-            bookToUpdate.img_url,
-            newStatus, 
-            bookToUpdate.is_loaded
-          );
-    
-          await this.bookRepository.updataStatus(id, newStatus);
-    
-          return updatedBook;
-        } catch (error) {
-          console.error('Error al actualizar el estado del libro:', error);
-          return null; // Puedes manejar el error de alguna manera adecuada
-        }
-      }
+    if (!updateStatus.status) {
+      return { book: updateStatus, message: 'El campo "status" ya estaba en false.' };
+    }
+
+    const statusUpdate = await this.bookRepository.updataStatus(id);
+
+    if (!statusUpdate) {
+      return { book: null }; // Error al actualizar la revisión
+    }
+    return { book: statusUpdate };
+
+  }
 }

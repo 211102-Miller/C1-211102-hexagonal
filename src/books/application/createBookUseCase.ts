@@ -9,7 +9,7 @@ export class CreateBookUserCase{
         title:string,
         author: string,
         img_url: string,
-        status:string,
+        status:boolean,
         is_loaded:boolean,
 
     ):Promise<Book|null>{

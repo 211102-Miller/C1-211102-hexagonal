@@ -7,7 +7,8 @@ import {
     updateBookLeadController,
     deleteBookControlller,
     updateBookController,
-    getBookFilterController
+    getBookFilterController,
+    updateBookStoreController
 } from "./depencies";
 import express from "express";
 
@@ -26,13 +27,13 @@ bookRoutes.get(
     "/getBook/:id", getBookController.getBook.bind(getBookController)
 )
 bookRoutes.put(
-    "/putLibro", updateStatusController.updateStatus.bind(updateStatusController)
+    "/putLibro/:id", updateStatusController.updateStatus.bind(updateStatusController)
 )
 bookRoutes.get(
     "/getInactivate", getBookInactiveController.getBookInactive.bind(getBookInactiveController)
 )
 bookRoutes.put(
-    "/putLead", updateBookLeadController.updateBookLead.bind(updateBookLeadController)
+    "/putLead/:id", updateBookLeadController.updateBookLead.bind(updateBookLeadController)
 )
 
 bookRoutes.delete(
@@ -43,5 +44,8 @@ bookRoutes.patch(
 )
 bookRoutes.get(
     "/getFilter/", getBookFilterController.bookFilter.bind(getBookFilterController)
+)
+bookRoutes.put(
+    "/store/:id", updateBookStoreController.updateBookStore.bind(updateBookStoreController)
 )
 
