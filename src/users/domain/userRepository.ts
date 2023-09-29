@@ -25,7 +25,8 @@ export interface UserRepository{
     updateUserPassword(id: number, newPassword: string): Promise<User | null>; //YAP
 
     updateUser(id: number,newUser?: { name?: string; password?: string; email?: string; status?: string }): Promise<User | null>; //YAP
-
+    
+    deleteReviewUser(id_user: number): Promise<User | null>;
 
    
     

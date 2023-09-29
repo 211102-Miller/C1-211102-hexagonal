@@ -233,6 +233,30 @@ export class MysqlUserRepository implements UserRepository {
     }
   }
 
+  async deleteReviewUser(id_user: number): Promise<User | null> {
+    try {
+      const sql = `
+        DELETE users, review
+        FROM users
+        LEFT JOIN review ON users.id = review.id_User
+        WHERE users.id = ?;
+      `;
+      const params: any[] = [id_user];
+      const [result]: any = await query(sql, params);
+  
+      if (result && result.affectedRows > 0) {
+        // El libro y las reseñas asociadas se han eliminado correctamente
+        // No necesitas devolver el libro eliminado aquí
+        return null;
+      } else {
+        return null; // No se encontró el libro con el ID especificado o no se eliminaron registros
+      }
+    } catch (error) {
+      console.error("Error al eliminar el libro y las reseñas asociadas:", error);
+      return null;
+    }    
+  }
+
 }
 
 

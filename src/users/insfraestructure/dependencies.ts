@@ -7,6 +7,7 @@ import { GetInactiveUserUseCase } from "../application/getInactiveUserUseCase";
 import { GetFilterUserUseCase } from "../application/getFilterUserUseCase";
 import { UpdatePasswordUserUseCase } from "../application/updateUserPasswordUseCase";
 import { UpdateUserUseCase } from "../application/updateUserUseCase";
+import { DeleterReviewUserUseCase } from "../application/deleteReviewUserUseCase";
 
 import { CreateUserController} from "./controllers/createUserController";
 import { GetUserAllContoller } from "./controllers/getUserAllController";
@@ -17,6 +18,7 @@ import { GetInactiveUserController } from "./controllers/getInactiveUserControll
 import { GetFilterUserController } from "./controllers/updateFilterUserControlller";
 import { UpdateUserPasswordController } from "./controllers/updateUserPasswordController";
 import { UpdateUserController } from "./controllers/updateUserController";
+import { DeleteReviewUserController } from "./controllers/deleteReviewUserController";
 
 import { MysqlUserRepository } from "./mysqlUserRepository";
 
@@ -32,6 +34,7 @@ export const getInactiveUserUseCase = new GetInactiveUserUseCase(mysqlUserReposi
 export const getFilterUserUseCase = new GetFilterUserUseCase(mysqlUserRepository);
 export const updatePasswordUserUseCase = new UpdatePasswordUserUseCase(mysqlUserRepository);
 export const updateUserUseCase = new UpdateUserUseCase (mysqlUserRepository);
+export const deleterReviewUserUseCase = new DeleterReviewUserUseCase(mysqlUserRepository)
 
 export const createUserController = new CreateUserController(createUserUseCase);
 export const getUserAllController = new GetUserAllContoller(getUserAllUseCase);
@@ -42,3 +45,4 @@ export const getInactiveUserController = new GetInactiveUserController(getInacti
 export const getFilterUserController = new GetFilterUserController(getFilterUserUseCase);
 export const updatePasswordUserController = new UpdateUserPasswordController(updatePasswordUserUseCase);
 export const updateUserController = new UpdateUserController(updateUserUseCase);
+export const deleteReviewUserController = new DeleteReviewUserController(deleterReviewUserUseCase)

@@ -8,7 +8,9 @@ import {
     getInactiveUserController,
     getFilterUserController,
     updatePasswordUserController,
-    updateUserController
+    updateUserController,
+    deleteReviewUserController
+    
 } from "./dependencies";
 
 export const userRoutes = express.Router();
@@ -51,5 +53,9 @@ userRoutes.put(
 userRoutes.put(
     '/updateUser/',
     updateUserController.updateUser.bind(updateUserController)
+)
+userRoutes.delete(
+    "/delete/:userId",
+    deleteUserController.deleteUser.bind(deleteUserController)
 )
 
