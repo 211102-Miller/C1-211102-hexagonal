@@ -1,6 +1,6 @@
 import express from 'express';
 import { Signale } from 'signale';
-import { userRoutes } from './users/insfraestructure/UserRoutes';
+import { userRoutes } from './users/insfraestructure/userRoutes';
 import { connectToPostgreSQL } from './database/postgresql';
 import { bookRoutes } from './books/infraestructure/bookRutes';
 import { reviewRoutes } from './rewies/insfraestructure/reviewRoutes';
