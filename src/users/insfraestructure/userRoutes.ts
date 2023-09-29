@@ -6,7 +6,7 @@ import {
     getUserController,
     activeUserController,
     getInactiveUserController,
-    updateFilterUserController,
+    getFilterUserController,
     updatePasswordUserController,
     updateUserController
 } from "./dependencies";
@@ -41,7 +41,7 @@ userRoutes.get(
 )
 userRoutes.get(
     '/filter/',
-    updateFilterUserController.run.bind(updateFilterUserController)
+    getFilterUserController.run.bind(getFilterUserController)
 );
 userRoutes.put(
     '/updatePassword/',

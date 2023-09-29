@@ -4,7 +4,7 @@ import { DeleteUserUseCase } from "../application/deleteUserUseCase";
 import { GetUserUseCase } from "../application/getUserUseCase";
 import { ActiveUserUseCase } from "../application/activateUserUseCase"
 import { GetInactiveUserUseCase } from "../application/getInactiveUserUseCase";
-import { UpdateFilterUserUseCase } from "../application/updateFilterUserUseCase";
+import { GetFilterUserUseCase } from "../application/getFilterUserUseCase";
 import { UpdatePasswordUserUseCase } from "../application/updateUserPasswordUseCase";
 import { UpdateUserUseCase } from "../application/updateUserUseCase";
 
@@ -14,7 +14,7 @@ import { DeleteUserController } from "./controllers/deleteUserController";
 import { GetUserController } from "./controllers/getUserController";
 import { ActiveUserController } from "./controllers/activateUserControlller";
 import { GetInactiveUserController } from "./controllers/getInactiveUserController";
-import { UpdateFilterUserController } from "./controllers/updateFilterUserControlller";
+import { GetFilterUserController } from "./controllers/updateFilterUserControlller";
 import { UpdateUserPasswordController } from "./controllers/updateUserPasswordController";
 import { UpdateUserController } from "./controllers/updateUserController";
 
@@ -29,7 +29,7 @@ export const deleteUserUseCase = new DeleteUserUseCase(mysqlUserRepository);
 export const getUserUseCase = new GetUserUseCase(mysqlUserRepository)
 export const activeUserUseCase = new ActiveUserUseCase(mysqlUserRepository);
 export const getInactiveUserUseCase = new GetInactiveUserUseCase(mysqlUserRepository);
-export const updateFilterUserUseCase = new UpdateFilterUserUseCase(mysqlUserRepository);
+export const getFilterUserUseCase = new GetFilterUserUseCase(mysqlUserRepository);
 export const updatePasswordUserUseCase = new UpdatePasswordUserUseCase(mysqlUserRepository);
 export const updateUserUseCase = new UpdateUserUseCase (mysqlUserRepository);
 
@@ -39,6 +39,6 @@ export const deleteUserController = new DeleteUserController(deleteUserUseCase);
 export const getUserController = new GetUserController(getUserUseCase)
 export const activeUserController = new ActiveUserController(activeUserUseCase);
 export const getInactiveUserController = new GetInactiveUserController(getInactiveUserUseCase);
-export const updateFilterUserController = new UpdateFilterUserController(updateFilterUserUseCase);
+export const getFilterUserController = new GetFilterUserController(getFilterUserUseCase);
 export const updatePasswordUserController = new UpdateUserPasswordController(updatePasswordUserUseCase);
 export const updateUserController = new UpdateUserController(updateUserUseCase);

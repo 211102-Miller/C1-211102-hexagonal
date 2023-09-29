@@ -147,34 +147,39 @@ export class MysqlUserRepository implements UserRepository {
       throw new Error('No se pudo listar usuarios inactivos:');
     }
   }
-
-  async filterUser(filter: string, email?: string, name?: string): Promise<User[]> {
-    const validFilters = ['email', 'name'];
-
-    if (!validFilters.includes(filter)) {
-      throw new Error('typo invalido');
-    }
-
-    if ((filter === 'email' && !email) || (filter === 'name' && !name)) {
-      throw new Error(`${filter.charAt(0).toUpperCase() + filter.slice(1)} error  ${filter}`);
-    }
-
-    const sql = `SELECT * FROM users WHERE ${filter} = ?`;
-    const value = filter === 'email' ? email : name;
-
+  async filterUser(filter: string, name?: string, email?: string): Promise<User[] | null> {
     try {
-      const [rows]: any = await query(sql, [value]);
+        let sql: string;
+        let value: string | undefined;
 
-      // Si no hay resultados, devolver un array vacío
-      if (!rows || rows.length === 0) {
-        return [];
-      }
+        switch (filter) {
+            case 'name':
+                if (!name) throw new Error("Se requiere el titulo para filtrar");
+                sql = 'SELECT * FROM users WHERE name = ?'
+                value = name;
+                break;
+            case 'email':
+                if (!email) throw new Error("Se requiere el autor para filtrar");
+                sql = 'SELECT * FROM users WHERE email = ?'
+                value = email;
+                break;
+            default:
+                throw new Error('Invalid filter type')
+        }
+        const [rows]: any = await query(sql, [value]);
+        if (!rows || rows.length === 0) {
+            throw new Error("No se encontraron resultados.");
+        }
 
-      // Mapear los resultados a objetos User
-      const users: User[] = rows.map((row: User) => new User(row.id, row.name, row.password, row.email, row.status));  // Asegúrate de que 'status' sea accesible en 'row'
-      return users;
+        return rows.map((row: User) => new User(
+            row.id,
+            row.name,
+            row.email,
+            row.password,
+            row.status
+        ));
     } catch (error) {
-      throw new Error('Error al obtener');
+        throw error; // Lanza el error para que se maneje en el controlador
     }
   }
   async updateUserPassword(id: number, newPassword: string): Promise<User | null> {

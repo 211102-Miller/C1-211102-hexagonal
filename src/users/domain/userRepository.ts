@@ -20,7 +20,7 @@ export interface UserRepository{
 
     getInactiveUser(): Promise<User[] | User | null>;//YAP
 
-    filterUser( filter: string, email?: string, name?: string ): Promise<User | User[] | null>
+    filterUser( filter: string, email?: string, name?: string ): Promise< User[] | null> //Yap
 
     updateUserPassword(id: number, newPassword: string): Promise<User | null>; //YAP
 
