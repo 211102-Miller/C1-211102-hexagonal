@@ -268,6 +268,66 @@ export class MysqlBookRepository implements BookRepository{
         return null; 
       }
   }
+  async getBookReview(): Promise<any[] | null> {
+    const sql = `
+        SELECT
+            b.id AS book_id,
+            b.title AS book_title,
+            b.author AS book_author,
+            b.img_url AS book_img_url,  
+            b.status AS book_status,    
+            b.is_loaded AS book_is_loaded,  
+            r.id AS review_id,
+            r.id_user AS id_user,
+            r.review_text AS review_text
+        FROM
+            books AS b
+        JOIN
+            Review AS r ON b.id = r.id_Book;
+    `;
+
+    try {
+        const [result]: any = await query(sql, []);
+        const dataBooks = Object.values(JSON.parse(JSON.stringify(result)));
+
+        // Crear un mapa para agrupar las reseñas por libro
+        const booksWithReviewsMap = dataBooks.reduce((acc: Map<number, any>, item: any) => {
+            const bookId = item.book_id;
+
+            if (!acc.has(bookId)) {
+                // Crear una nueva entrada en el mapa para el libro
+                acc.set(bookId, {
+                    id: bookId,
+                    title: item.book_title,
+                    author: item.book_author,
+                    img_url: item.book_img_url,
+                    status: item.book_status,
+                    is_loaded: item.book_is_loaded,
+                    reviews: [], // Inicialmente, el libro no tiene reseñas
+                });
+            }
+
+            // Agregar la reseña al libro correspondiente en el mapa
+            const book = acc.get(bookId)!;
+            book.reviews.push({
+                id: item.review_id,
+                id_user:item.id_user,
+                review_text: item.review_text,
+            });
+
+            return acc;
+        }, new Map<number, any>());
+
+        // Obtener la lista de libros con reseñas del mapa
+        const booksWithReviews: any[] = [...booksWithReviewsMap.values()];
+
+        return booksWithReviews;
+    } catch (error) {
+        console.error("Error al obtener la lista de libros con reseñas:", error);
+        return null;
+    }
+}
+  
       
     
     

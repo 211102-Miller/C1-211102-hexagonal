@@ -23,6 +23,8 @@ export interface BookRepository{
     updateBookStore(id:number):Promise<Book | null>;
 
     deleteBook(id:number):Promise<Book | null>;
+
+    getBookReview():Promise<any[]| null>
     
     updateBook(
         id: number,

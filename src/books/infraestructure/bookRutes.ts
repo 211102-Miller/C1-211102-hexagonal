@@ -8,7 +8,8 @@ import {
     deleteBookControlller,
     updateBookController,
     getBookFilterController,
-    updateBookStoreController
+    updateBookStoreController,
+    getBookReviewsController
 } from "./depencies";
 import express from "express";
 
@@ -47,5 +48,9 @@ bookRoutes.get(
 )
 bookRoutes.put(
     "/store/:id", updateBookStoreController.updateBookStore.bind(updateBookStoreController)
+)
+
+bookRoutes.get(
+    "/review", getBookReviewsController.getAll.bind(getBookReviewsController)
 )
 
