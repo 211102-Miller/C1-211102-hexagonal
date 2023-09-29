@@ -9,7 +9,7 @@ import {
     updateBookController,
     getBookFilterController,
     updateBookStoreController,
-    getBookReviewsController
+    getBookReviewsController,
 } from "./depencies";
 import express from "express";
 
