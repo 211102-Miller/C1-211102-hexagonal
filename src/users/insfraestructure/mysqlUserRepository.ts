@@ -103,7 +103,7 @@ export class MysqlUserRepository implements UserRepository {
     try {
       const sql = `
             UPDATE users
-            SET status = 'active'
+            SET status = true
             WHERE id = ?
           `;
       const params: any[] = [id];
@@ -126,7 +126,7 @@ export class MysqlUserRepository implements UserRepository {
       const sql = `
             SELECT id, name, password, email, status
             FROM users
-            WHERE status = 'inactive'
+            WHERE status = false
           `;
       const params: any[] = [];  // No hay parámetros en esta consulta
       const [rows]: any = await query(sql, params);

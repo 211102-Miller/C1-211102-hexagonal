@@ -8,9 +8,9 @@ export class ActiveUserController {
 
     async run(req:Request, res:Response) {
         try {
-            let {id,} = req.body
+            let {id,} = req.params
         
-            let activeUser = await this.activeUserUseCase.run(id)
+            let activeUser = await this.activeUserUseCase.run(Number(id))
 
             if(activeUser){
                 return res.status(200).send({

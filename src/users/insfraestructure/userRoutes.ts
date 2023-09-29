@@ -31,8 +31,8 @@ userRoutes.get(
     getUserController.getUserId.bind(getUserController)
 )
 
-userRoutes.post(
-    "/activateUser",
+userRoutes.put(
+    "/activateUser/:id",
     activeUserController.run.bind(activeUserController)
 )
 userRoutes.get(
@@ -48,7 +48,7 @@ userRoutes.put(
     updatePasswordUserController.updatePassword.bind(updatePasswordUserController)
 )
 //actualizar datos del usuario
-userRoutes.post(
+userRoutes.put(
     '/updateUser/',
     updateUserController.updateUser.bind(updateUserController)
 )

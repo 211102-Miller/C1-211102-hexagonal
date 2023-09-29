@@ -16,15 +16,15 @@ export interface UserRepository{
     getUser(id:number): Promise<User | null> //YAP
 
     
-    activeUser(id: number): Promise<User | null>;
+    activeUser(id: number): Promise<User | null>;//YAP
 
-    getInactiveUser(): Promise<User[] | User | null>;
+    getInactiveUser(): Promise<User[] | User | null>;//YAP
 
     filterUser( filter: string, email?: string, name?: string ): Promise<User | User[] | null>
 
-    updateUserPassword(id: number, newPassword: string): Promise<User | null>;
+    updateUserPassword(id: number, newPassword: string): Promise<User | null>; //YAP
 
-    updateUser(id: number,newUser?: { name?: string; password?: string; email?: string; status?: string }): Promise<User | null>;
+    updateUser(id: number,newUser?: { name?: string; password?: string; email?: string; status?: string }): Promise<User | null>; //YAP
 
 
    
