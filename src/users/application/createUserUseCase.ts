@@ -9,7 +9,7 @@ export class CreateUserUseCase{
         name:String,
         password:String,
         email:String,
-        status:string
+        status:boolean
     ):Promise<User |null >{
         try{
             const createUser = await this.userRepository.createUser(name, password,email,status);

@@ -43,8 +43,8 @@ userRoutes.get(
     '/filter/',
     updateFilterUserController.run.bind(updateFilterUserController)
 );
-userRoutes.post(
-    '/updatePassword',
+userRoutes.put(
+    '/updatePassword/',
     updatePasswordUserController.updatePassword.bind(updatePasswordUserController)
 )
 //actualizar datos del usuario

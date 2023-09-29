@@ -2,11 +2,16 @@ import { Request, Response } from "express";
 import { UpdatePasswordUserUseCase } from "../../application/updateUserPasswordUseCase";
 
 
-export class UpdatePasswordUserController {
-    constructor(readonly updatePasswordUserUseCase: UpdatePasswordUserUseCase,) {}
+
+
+export class UpdateUserPasswordController {
+    constructor(
+        readonly updatePasswordUserUseCase: UpdatePasswordUserUseCase,
+   ) {}
 
    async updatePassword(req:Request, res:Response) {
     try {
+
         let {
             id,
             password,

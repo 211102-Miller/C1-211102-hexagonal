@@ -15,7 +15,7 @@ import { GetUserController } from "./controllers/getUserController";
 import { ActiveUserController } from "./controllers/activateUserControlller";
 import { GetInactiveUserController } from "./controllers/getInactiveUserController";
 import { UpdateFilterUserController } from "./controllers/updateFilterUserControlller";
-import { UpdatePasswordUserController } from "./controllers/updateUserPasswordController";
+import { UpdateUserPasswordController } from "./controllers/updateUserPasswordController";
 import { UpdateUserController } from "./controllers/updateUserController";
 
 import { MysqlUserRepository } from "./mysqlUserRepository";
@@ -40,5 +40,5 @@ export const getUserController = new GetUserController(getUserUseCase)
 export const activeUserController = new ActiveUserController(activeUserUseCase);
 export const getInactiveUserController = new GetInactiveUserController(getInactiveUserUseCase);
 export const updateFilterUserController = new UpdateFilterUserController(updateFilterUserUseCase);
-export const updatePasswordUserController = new UpdatePasswordUserController(updatePasswordUserUseCase);
+export const updatePasswordUserController = new UpdateUserPasswordController(updatePasswordUserUseCase);
 export const updateUserController = new UpdateUserController(updateUserUseCase);

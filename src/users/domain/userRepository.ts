@@ -5,15 +5,15 @@ export interface UserRepository{
         name:String, 
         passwordpassword:String, 
         email:String, 
-        status:string 
-        ): Promise<User | null>;
+        status:boolean 
+    ): Promise<User | null>; //YAP
 
      
-    getAllUsers(): Promise<User[]>;
+    getAllUsers(): Promise<User[]>; //YAP
 
-    deleteUser(userId:string): Promise<boolean>;
+    deleteUser(userId:string): Promise<boolean>; //YAP
 
-    getUser(id:number): Promise<User | null>
+    getUser(id:number): Promise<User | null> //YAP
 
     
     activeUser(id: number): Promise<User | null>;
