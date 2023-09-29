@@ -1,5 +1,8 @@
 import { GetBookInactiveUseCase } from "../../application/getBookInactiveUseCase";
 import { Response, Request } from "express";
+import { ValidationStatusBook } from "../../domain/validation/validationBooks";
+import { validate } from "class-validator";
+
 
 export class GetBookInactiveController {
   constructor(readonly getBookInactiveUseCase: GetBookInactiveUseCase) {}
@@ -23,10 +26,20 @@ export class GetBookInactiveController {
         });
       }
     } catch (error) {
-      return res.status(500).json({
+      if (error instanceof Error) {
+
+        if (error.message.startsWith('[')) {
+          
+          return res.status(400).send({
+            status: "error",
+            message: "Validation failed",
+            errors: JSON.parse(error.message)
+          });
+        }
+      }
+      return res.status(500).send({
         status: "error",
-        data: [],
-        message: "Error al obtener la lista de libros inactivos",
+        message: "An error occurred while adding the book."
       });
     }
   }

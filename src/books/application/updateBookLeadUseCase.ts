@@ -1,5 +1,8 @@
 import { Book } from "../domain/book";
 import { BookRepository } from "../domain/bookRepositoy";
+import { validate } from "class-validator";
+import { ValidationIdBook } from "../domain/validation/validationBooks";
+
 
 export class UpdateBookLeadUseCase{
     constructor(readonly bookRepository: BookRepository){}
@@ -11,6 +14,12 @@ export class UpdateBookLeadUseCase{
         }
         if (getLoad.status) {
             return { book: getLoad, message: 'El campo "Load" ya estaba en true.' };
+        }
+        
+        let valitationPost = new ValidationIdBook(id);
+        const validation = await validate(valitationPost)
+        if (validation.length > 0) {
+            throw new Error(JSON.stringify(validation));
         }
 
         const loadUpdate = await this.bookRepository.updateBookLead(id)

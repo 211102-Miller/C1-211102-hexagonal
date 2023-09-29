@@ -9,15 +9,6 @@ export class UpdateBookController {
       const { id } = req.params; // Supongo que el ID del libro se pasa como un parámetro de la URL
       const { title, author, img_url, status, is_loaded } = req.body;
 
-      // Verificar si algún campo requerido está vacío o nulo
-      if (!title || !author || !img_url || status === undefined || is_loaded === undefined) {
-        return res.status(400).send({
-          status: "error",
-          data: [],
-          validations: [],
-          message: "Todos los campos son obligatorios y no pueden estar vacíos o nulos.",
-        });
-      }
 
       // Verificar si el libro existe antes de actualizarlo
       const updatedBook = await this.updateBookUseCase.update(
@@ -51,12 +42,20 @@ export class UpdateBookController {
         });
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+
+        if (error.message.startsWith('[')) {
+          
+          return res.status(400).send({
+            status: "error",
+            message: "Validation failed",
+            errors: JSON.parse(error.message)
+          });
+        }
+      }
       return res.status(500).send({
         status: "error",
-        data: [],
-        validations: [],
-        message: "Error interno del servidor",
+        message: "An error occurred while adding the book."
       });
     }
   }

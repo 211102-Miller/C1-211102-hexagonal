@@ -8,14 +8,6 @@ export class DeleteBookController {
     try {
       const id = Number(req.params.id);
   
-      if (!id) {
-        return res.status(400).send({
-          status: "error",
-          data: [],
-          validations: [],
-          message: "El campo 'id' es requerido en la solicitud.",
-        });
-      }
   
       const deleted = await this.deleteBookUseCase.deleteBook(id);
   
@@ -33,12 +25,21 @@ export class DeleteBookController {
         });
       }
     } catch (error) {
-      console.error("Error al eliminar el libro:", error);
-      return res.status(500).send({
-        status: "error",
-        data: [],
-        message: "Ocurrió un error interno al eliminar el libro.",
-      });
+        if (error instanceof Error) {
+
+          if (error.message.startsWith('[')) {
+            
+            return res.status(400).send({
+              status: "error",
+              message: "Validation failed",
+              errors: JSON.parse(error.message)
+            });
+          }
+        }
+        return res.status(500).send({
+          status: "error",
+          message: "An error occurred while adding the book."
+        });
     }
   }
 }

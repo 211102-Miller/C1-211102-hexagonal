@@ -40,7 +40,7 @@ bookRoutes.put(
 bookRoutes.delete(
     "/deleteBook/:id", deleteBookControlller.deleteBook.bind(deleteBookControlller)
 )
-bookRoutes.patch(
+bookRoutes.put(
     "/putBook/:id", updateBookController.update.bind(updateBookController)
 )
 bookRoutes.get(

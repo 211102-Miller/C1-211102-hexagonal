@@ -8,21 +8,21 @@ export interface BookRepository{
         img_url:string,
         status:boolean,
         is_loaded: boolean
-    ):Promise<Book | null>;
+    ):Promise<Book | null>; //YAP
     
     getAll():Promise<Book[] | null>;
 
-    getBook(id:number):Promise<Book|null>;
+    getBook(id:number):Promise<Book|null>; //YAP
 
-    updataStatus(id:number):Promise<Book | null>;
+    updataStatus(id:number):Promise<Book | null>; //YAP
 
-    getBookInactive(status:boolean):Promise<Book[]|null>;
+    getBookInactive(status:boolean):Promise<Book[]|null>; 
 
-    updateBookLead(id:number):Promise<Book | null>;
+    updateBookLead(id:number):Promise<Book | null>; //YAP DIGAMOS
 
-    updateBookStore(id:number):Promise<Book | null>;
+    updateBookStore(id:number):Promise<Book | null>;//YAP
 
-    deleteBook(id:number):Promise<Book | null>;
+    deleteBook(id:number):Promise<Book | null>; //YAP
 
     getBookReview():Promise<any[]| null>
     
@@ -33,7 +33,7 @@ export interface BookRepository{
         img_url: string,
         status: boolean,
         is_loaded: boolean
-    ): Promise<Book | null>
+    ): Promise<Book | null> //Yap
 
     getBookFilter(
         filter: string,

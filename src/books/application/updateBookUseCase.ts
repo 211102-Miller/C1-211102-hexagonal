@@ -1,3 +1,5 @@
+import { validate } from "class-validator";
+import { validationUpdateBook } from "../domain/validation/validationBooks";
 import { Book } from "../domain/book";
 import { BookRepository } from "../domain/bookRepositoy";
 
@@ -12,6 +14,12 @@ export class UpdateBookUseCase {
     status: boolean,
     is_loaded: boolean
   ): Promise<Book | null> {
+
+    let valitationUpdate = new validationUpdateBook(id,title, author, img_url, status, is_loaded);
+        const validation = await validate(valitationUpdate)
+        if (validation.length > 0) {
+            throw new Error(JSON.stringify(validation));
+      }
     try {
       const updatedBook = await this.bookRepository.updateBook(
         id,
