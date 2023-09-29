@@ -23,7 +23,10 @@ async function connectToPostgreSQL() {
     } catch (error) {
         signale.error('Error al conectar a PostgreSQL:', error);
     }
-}
+} 
+
+
+
 
 export async function query(sql: string, params: any[]) {
     try {
