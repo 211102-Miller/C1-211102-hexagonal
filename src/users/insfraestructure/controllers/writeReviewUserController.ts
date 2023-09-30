@@ -25,12 +25,21 @@ export class WriteReviewUserController {
         message: "Error al escribir la reseña. Asegúrate de que el usuario ha prestado y devuelto el libro."
       });
     } catch (error) {
-      console.error('Error al escribir la reseña:', error);
-      res.status(500).send({
-        status: "error",
-        data: [],
-        message: "Error interno del servidor al escribir la reseña."
-      });
+        if (error instanceof Error) {
+
+            if (error.message.startsWith('[')) {
+              
+              return res.status(400).send({
+                status: "error",
+                message: "Validation failed",
+                errors: JSON.parse(error.message)
+              });
+            }
+          }
+          return res.status(500).send({
+            status: "error",
+            message: "An error occurred while adding the book."
+          });
     }
   }
 }

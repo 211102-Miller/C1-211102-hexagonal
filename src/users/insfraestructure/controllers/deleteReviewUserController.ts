@@ -25,12 +25,21 @@ export class DeleteReviewUserController {
               message: "No se encontró una reseña con los IDs especificados",
           });
       } catch (error) {
-          console.error("Error en el controlador de eliminación de reseñas:", error);
-          return res.status(500).send({
+        if (error instanceof Error) {
+
+          if (error.message.startsWith('[')) {
+            
+            return res.status(400).send({
               status: "error",
-              data: [],
-              message: "Ocurrió un error interno al eliminar la reseña",
-          });
+              message: "Validation failed",
+              errors: JSON.parse(error.message)
+            });
+          }
+        }
+        return res.status(500).send({
+          status: "error",
+          message: "An error occurred while adding the book."
+        });
       }
   }
 }

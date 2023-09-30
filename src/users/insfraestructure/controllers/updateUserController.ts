@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UpdateUserUseCase } from "../../application/updateUserUseCase";
 
 export class UpdateUserController {
-  constructor( private readonly updateUserUseCase: UpdateUserUseCase) {}
+  constructor(private readonly updateUserUseCase: UpdateUserUseCase) { }
 
   async updateUser(req: Request, res: Response) {
     try {
@@ -36,9 +36,19 @@ export class UpdateUserController {
         });
       }
     } catch (error) {
-      return res.status(500).json({
+      if (error instanceof Error) {
+
+        if (error.message.startsWith('[')) {
+          return res.status(400).send({
+            status: "error",
+            message: "Validation failed",
+            errors: JSON.parse(error.message)
+          });
+        }
+      }
+      return res.status(500).send({
         status: "error",
-        message: "Error al actualizar"
+        message: "An error occurred while adding the book."
       });
     }
   }

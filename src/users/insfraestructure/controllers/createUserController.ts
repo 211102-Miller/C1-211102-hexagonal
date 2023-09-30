@@ -8,17 +8,6 @@ export class CreateUserController {
         try {
             let { name, password, email, status } = req.body;
 
-            // Validar que se proporcionen todos los campos requeridos
-            if (!name || !password || !email || status === undefined) {
-                return res.status(400).send({
-                    status: "error",
-                    data: [],
-                    validations: [],
-                    message: "Todos los campos son obligatorios y no pueden estar vacíos o nulos.",
-                });
-            }
-
-            // Puedes agregar más validaciones según tus requerimientos
 
             // Crear el usuario si todas las validaciones son exitosas
             let createUser = await this.createUserUseCase.run(name, password, email, status);
@@ -44,14 +33,22 @@ export class CreateUserController {
                 message: "Error al crear el usuario.",
             });
 
-        } catch (error) {
-            console.error(error);
-            return res.status(500).send({
+        }catch (error) {
+            if (error instanceof Error) {
+
+                if (error.message.startsWith('[')) {
+                  
+                  return res.status(400).send({
+                    status: "error",
+                    message: "Validation failed",
+                    errors: JSON.parse(error.message)
+                  });
+                }
+              }
+              return res.status(500).send({
                 status: "error",
-                data: [],
-                validations: [],
-                message: "Error interno del servidor",
-            });
+                message: "An error occurred while adding the book."
+              });
+            }
         }
-    }
 }

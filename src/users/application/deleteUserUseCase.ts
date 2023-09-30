@@ -6,6 +6,7 @@ export class DeleteUserUseCase {
 
     async delete(userId: string): Promise<boolean> {
 
+    
         try {
             // Assuming deleteUser returns a boolean indicating success
         const  UserDelete = await this.userRepository.deleteUser(userId);

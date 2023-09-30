@@ -28,11 +28,21 @@ export class LoginUserController {
                 });
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            return res.status(500).json({
+            if (error instanceof Error) {
+
+                if (error.message.startsWith('[')) {
+                  
+                  return res.status(400).send({
+                    status: "error",
+                    message: "Validation failed",
+                    errors: JSON.parse(error.message)
+                  });
+                }
+              }
+              return res.status(500).send({
                 status: "error",
-                message: "Error al iniciar sesión.",
-            });
+                message: "An error occurred while adding the book."
+              });
         }
     }
 }
