@@ -26,7 +26,20 @@ export interface UserRepository{
 
     updateUser(id: number,newUser?: { name?: string; password?: string; email?: string; status?: string }): Promise<User | null>; //YAP
     
-    deleteReviewUser(id_user: number): Promise<User | null>;
+    deleteReviewUser(id_user: number,id_review:string): Promise<boolean>; //YAP
+
+    loadBookUser(id_user:number,id_book:number):Promise<string |null> //YAP
+
+    returnBookLoad(id_user:number, id_book:number):Promise<string |null> //YAP
+
+    writeReviewUser(id_user:number,id_book:number,review_text:string ):Promise<boolean | null>; //YAP
+
+    updateReviewUser(id_user:number,id_book:number,review_text:string):Promise<boolean | null>
+    
+    loginUser(email:string,password:string):Promise<User | null>
+
+    signoffUser(id:number):Promise<User| null>
+
 
    
     

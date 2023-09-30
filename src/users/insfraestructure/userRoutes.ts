@@ -9,7 +9,13 @@ import {
     getFilterUserController,
     updatePasswordUserController,
     updateUserController,
-    deleteReviewUserController
+    deleteReviewUserController,
+    loadBookUserController,
+    returnBookLoadController,
+    writeReviewUserController,
+    updateReviewUserController,
+    loginUserController,
+    singOffUserController
     
 } from "./dependencies";
 
@@ -57,5 +63,27 @@ userRoutes.put(
 userRoutes.delete(
     "/delete/:userId",
     deleteUserController.deleteUser.bind(deleteUserController)
+)
+userRoutes.delete(
+    "/delete/review/:id_user/:id_review",
+    deleteReviewUserController.deleteReview.bind(deleteReviewUserController)
+)
+userRoutes.post(
+    "/load/book", loadBookUserController.loadBook.bind(loadBookUserController)
+)
+userRoutes.put(
+    "/return/book/loands", returnBookLoadController.returnLead.bind(returnBookLoadController)
+)
+userRoutes.post(
+    "/write/review/book", writeReviewUserController.writeReview.bind(writeReviewUserController)
+)
+userRoutes.put(
+    "/update/review/book", updateReviewUserController.updateReview.bind(updateReviewUserController)
+)
+userRoutes.post(
+    "/login", loginUserController.loginUser.bind(loginUserController)
+)
+userRoutes.post(
+    "/singOff", singOffUserController.singOff.bind(singOffUserController)
 )
 

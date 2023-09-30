@@ -4,13 +4,13 @@ import { UserRepository } from "../domain/userRepository";
 export class DeleterReviewUserUseCase{
     constructor(readonly userRepository:UserRepository){}
 
-    async deleteRevie(id_user:number):Promise<User | null>{
+    async deleteRevie(id_user:number,id_review:string):Promise<boolean>{
 
         try {
-           const deletes = await this.userRepository.deleteReviewUser(id_user);
+           const deletes = await this.userRepository.deleteReviewUser(id_user,id_review);
            return deletes
         } catch (error) {
-            return null;
+            return false;
         }        
     }
 }
