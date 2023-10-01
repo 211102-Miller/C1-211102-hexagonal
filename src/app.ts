@@ -4,6 +4,7 @@ import { userRoutes } from './users/insfraestructure/userRoutes';
 import { connectToPostgreSQL } from './database/postgresql';
 import { loandRouter } from './loands/infraestructure/loandsRoutes';
 import { loandReviews } from './reviews/infraestructure/reviewRoutes';
+import { bookRoutes } from './books/infraestructure/bookRutes';
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/user",userRoutes)
 app.use('/loand',loandRouter)
 app.use('/review',loandReviews)
+app.use("/book",bookRoutes)
 
 
 
