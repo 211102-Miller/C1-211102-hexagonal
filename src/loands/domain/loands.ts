@@ -1,4 +1,4 @@
-export class Loan {
+export class Loand {
     constructor(
         readonly id: number,
         readonly loan: string,
