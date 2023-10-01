@@ -12,10 +12,12 @@ const signale = new Signale();
 const port = 3000;
 
 app.use(express.json());
-app.use("/user",userRoutes)
+app.use("/user",userRoutes) //Esto es de usuarios
 app.use('/loand',loandRouter)
 app.use('/review',loandReviews)
 app.use("/book",bookRoutes)
+
+
 
 
 
