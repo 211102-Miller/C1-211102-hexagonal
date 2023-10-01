@@ -5,7 +5,9 @@ import { connectToPostgreSQL } from './database/postgresql';
 
 
 
-import { loandRouter } from './loands/infraestructure/loandsRoutes';
+
+
+import { loandReviews } from './reviews/infraestructure/reviewRoutes';
 
 const app = express();
 const signale = new Signale();
@@ -15,7 +17,8 @@ app.use(express.json());
 
 
 
-app.use('/loand',loandRouter)
+
+app.use('/review',loandReviews)
 
 
 
