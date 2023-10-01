@@ -1,28 +1,27 @@
 import { Request, Response } from "express";
-import { GetBookFilterUseCase } from "../../application/getBookFilterUseCase";
+import { ReturnBookLoadUseCase } from "../../application/returnBookLoadUseCase";
 
-export class GetBookFilterController{
-    constructor ( readonly getBookFilterUseCase : GetBookFilterUseCase){}
+export class ReturnBookLoadController {
+    constructor( readonly returnBookLoadUseCase: ReturnBookLoadUseCase,) {}
 
-    async bookFilter(req: Request, res: Response) {
+    async returnLead(req: Request, res: Response) {
         try {
-            let {
-                filter,
-                title,
-                author
-            } = req.query;
-            const getFilter = await this.getBookFilterUseCase.fliterBook(filter as string, title as string, author as string)
-            if (getFilter) {
+            const { id_user, id_book } = req.body; // Supongamos que recibes el ID del usuario y el ID del libro desde la solicitud
+
+
+            const result = await this.returnBookLoadUseCase.bookLead(id_user,id_book)
+
+            if (result === "Libro devuelto exitosamente.") {
                 return res.status(200).send({
                     status: "success",
-                    data: {
-                        getFilter
-                    }
-                })
+                    data: [],
+                    message: result
+                });
             } else {
-                return res.status(404).send({
+                return res.status(400).send({
                     status: "error",
-                    message: "No se encontraron resultados."
+                    data: [],
+                    message: result
                 });
             }
         } catch (error) {

@@ -1,31 +1,32 @@
+
 import { Request, Response } from "express";
-import { GetBookFilterUseCase } from "../../application/getBookFilterUseCase";
+import { ActiveUserUseCase } from "../../application/activateUserUseCase";
 
-export class GetBookFilterController{
-    constructor ( readonly getBookFilterUseCase : GetBookFilterUseCase){}
 
-    async bookFilter(req: Request, res: Response) {
+export class ActiveUserController {
+    constructor(readonly activeUserUseCase : ActiveUserUseCase) {}
+
+    async run(req:Request, res:Response) {
         try {
-            let {
-                filter,
-                title,
-                author
-            } = req.query;
-            const getFilter = await this.getBookFilterUseCase.fliterBook(filter as string, title as string, author as string)
-            if (getFilter) {
+            let {id,} = req.params
+        
+            let activeUser = await this.activeUserUseCase.run(Number(id))
+
+            if(activeUser){
                 return res.status(200).send({
-                    status: "success",
-                    data: {
-                        getFilter
+                    status:"succes",
+                    data:{
+                        activeUser
                     }
                 })
-            } else {
+            }
+            if (!activeUser) {
                 return res.status(404).send({
                     status: "error",
-                    message: "No se encontraron resultados."
+                    message: "No se encontro el ID del Usuario"
                 });
             }
-        } catch (error) {
+        } catch (error) {   
             if (error instanceof Error) {
 
                 if (error.message.startsWith('[')) {
@@ -44,3 +45,5 @@ export class GetBookFilterController{
         }
     }
 }
+
+

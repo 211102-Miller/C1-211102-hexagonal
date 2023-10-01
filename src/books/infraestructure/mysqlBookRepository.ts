@@ -1,5 +1,5 @@
 //import { query } from '../../database/postgresql';
-import { query } from '../../database/mysql';
+import { query } from '../../database/mysqlUserRepository';
 import { connectToPostgreSQL } from '../../database/postgresql';
 import { BookRepository } from "../domain/bookRepositoy"
 import { Book } from '../domain/book';

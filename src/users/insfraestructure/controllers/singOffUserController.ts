@@ -1,31 +1,29 @@
 import { Request, Response } from "express";
-import { GetBookFilterUseCase } from "../../application/getBookFilterUseCase";
+import { SingOffUserUseCase } from "../../application/signOffUserUseCase";
 
-export class GetBookFilterController{
-    constructor ( readonly getBookFilterUseCase : GetBookFilterUseCase){}
-
-    async bookFilter(req: Request, res: Response) {
+export class SingOffUserController {
+    constructor(readonly singOffUserUseCase : SingOffUserUseCase) {}
+    async singOff(req:Request, res:Response) {
         try {
-            let {
-                filter,
-                title,
-                author
-            } = req.query;
-            const getFilter = await this.getBookFilterUseCase.fliterBook(filter as string, title as string, author as string)
-            if (getFilter) {
+            let {id} = req.body
+        
+            let off = await this.singOffUserUseCase.SingOff(id)
+
+            if(off){
                 return res.status(200).send({
-                    status: "success",
-                    data: {
-                        getFilter
+                    status:"succes",
+                    data:{
+                        off
                     }
                 })
-            } else {
+            }
+            else{
                 return res.status(404).send({
                     status: "error",
-                    message: "No se encontraron resultados."
+                    message: "No se encontro el usuario"
                 });
             }
-        } catch (error) {
+        } catch (error) {   
             if (error instanceof Error) {
 
                 if (error.message.startsWith('[')) {
@@ -44,3 +42,4 @@ export class GetBookFilterController{
         }
     }
 }
+
