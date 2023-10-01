@@ -12,10 +12,13 @@ export interface ReviewRepository {
         status: boolean
     ): Promise <Review | null>
 
-    getReview(id:number):Promise< Review| Review[]| null>;
+    getReview(id:number):Promise< Review| Review[]| null>; //Simplemente prueba
 
     updateReviweInactive(id: number): Promise<Review | null>;
 
+
+
+    
     getReviewsInactive(status:boolean):Promise<Review[]|null>;
 
     deleteReview(id:number, id_User:number):Promise<Review | null>;
